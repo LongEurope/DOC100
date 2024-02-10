@@ -209,6 +209,13 @@ def fart():
     ''')
     print('Good Job')
 
+def low_pix_fart():
+    global end_game
+    end_game = True
+    global farting
+    farting = True
+    print('Good Job')
+
 def main():
     car()
     print('You are driving through the night, it\'s been a while since you were on this rundown highway, and you start to get nervous that you\'re lost.')
@@ -248,6 +255,48 @@ def main():
                     print('Please input "stay", or "get out" to progress.')
         elif road == 'continue':
             death()
+            bad_road()
+            break
+        else:
+            print('Please input "exit", or "continue" in order to progress.')
+    if farting == False:
+        print('Who knows what they\'ll do to you, may God have mercy on you.')
+        print('Game Over.')
+    else:
+        print('Munch')
+
+def low_pix_main():
+    print('You are driving through the night, it\'s been a while since you were on this rundown highway, and you start to get nervous that you\'re lost.')
+    while True:
+        if end_game == True:
+            break
+        road = input('As your anxiety rises, a fork in the road appears. You can either merge to the left lane to exit the highway, or continue. Will you "exit", or will you "continue"? ').lower()
+        if road == 'exit':
+            good_road()
+            while True:
+                if end_game == True:
+                    break
+                gate = input('You can either stay in the safety of your car, or you could get out. Will you "stay", or "get out"? ').lower()
+                if gate == 'get out':
+                    good_gate()
+                    bar = input('You need to make the decision now, there are lights on in the bar, maybe people are in there. Will you "enter", or keep "running"? ').lower()
+                    if bar == 'enter':
+                        enter()
+                        break
+                    elif bar == 'keep running':
+                        keep_running()
+                        break
+                    elif bar == 'think you the shit bitch you not even the fart':
+                        low_pix_fart()
+                        break
+                    else:
+                        print('Please input "enter", or "keep running" to progress')
+                elif gate == 'stay':
+                    bad_gate()
+                    break
+                else:
+                    print('Please input "stay", or "get out" to progress.')
+        elif road == 'continue':
             bad_road()
             break
         else:
@@ -605,4 +654,19 @@ def death():
   .    .. .....:.............::... . .......................            ........       ..                                        
         ''')
 
-main()
+while True:
+    end_game = False
+    farting = False
+    screen = input('Would you like to play with no visuals(recommended for small screens) or with visuals? Press "y" to play with visuals and press "n" to play without: ')
+    if screen == 'y':
+        main()
+        keep = input('Would you like to go again? Press "y" to go again, or any other key to stop.')
+        if keep != 'y':
+            break
+    elif screen == 'n':
+        low_pix_main()
+        keep = input('Would you like to go again? Press "y" to go again, or any other key to stop.')
+        if keep != 'y':
+            break
+    else:
+        print('Please input a valid answer')
