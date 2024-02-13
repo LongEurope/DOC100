@@ -1,21 +1,129 @@
 #Hangman project
+#! 'a'.join(list) joins the items in list together with an 'a' in the middle
 
 import random
 
-word_list = []
+hangman_ascii = ['''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''']
 
-def choose_word():
-    word = random.choice(word_list)
-
-def user_guess():
-    global guess
+def get_guess():
     while True:
-        guess = input('Please input a letter\n')
-        if len(guess) == 1 and guess.isalpha():
-            guess = guess.lower()
+        function_guess = input('Please input a letter to guess: ')
+        if len(function_guess) == 1 and function_guess.isalpha():
+            function_guess = function_guess.lower()
             break
         else:
-            print('Please input a single letter')
+            print('Please input a letter')
+    return function_guess
 
-def compare():
-    return
+def get_keep():
+    while True:
+        function_keep = input('Please input "y" to keep playing, or any other key to stop playing.\n')
+        if len(function_keep) == 1 and function_keep.isalpha():
+            function_keep = function_keep.lower()
+            break
+        else:
+            print('Please input a valid key')
+    return function_keep
+
+
+#Main
+print('''
+888                                                           
+888                                                           
+888                                                           
+88888b.  8888b. 88888b.  .d88b. 88888b.d88b.  8888b. 88888b.  
+888 "88b    "88b888 "88bd88P"88b888 "888 "88b    "88b888 "88b 
+888  888.d888888888  888888  888888  888  888.d888888888  888 
+888  888888  888888  888Y88b 888888  888  888888  888888  888 
+888  888"Y888888888  888 "Y88888888  888  888"Y888888888  888 
+                             888                              
+                        Y8b d88P                              
+                         "Y88P"                               
+      ''')
+
+while True:
+    word_list = ['aardvark', 'beaver', 'cat']
+    lives = 6
+    guessed = []
+    game_won = False
+    game_lost = False
+    display = ''
+    ever_played = False
+
+    word = random.choice(word_list)
+    for _ in word:
+        display += '_'
+    word_length = len(word)
+    while game_won == False and game_lost == False:
+        print(hangman_ascii[6 - lives])
+        print(display)
+        game_guess = get_guess()
+        if game_guess not in word:
+            lives -= 1
+            if lives == 0:
+                game_lost = True
+            print('Letter was not in word')
+        else:
+            for index in range(word_length):
+                if word[index] == game_guess:
+                    display_list = list(display)
+                    display_list[index] = game_guess
+                    display = ''.join(display_list)
+                    if '_' not in display:
+                        game_won = True
+    if game_lost:
+        print(f'The word was {word}')
+    elif game_won:
+        print(f'You got the word, well done')
+    keep = get_keep
+    if keep != 'y':
+        break
