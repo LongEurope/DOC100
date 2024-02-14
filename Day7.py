@@ -1,5 +1,7 @@
 #Hangman project
-#! 'a'.join(list) joins the items in list together with an 'a' in the middle
+#! Note: 'a'.join(list) joins the items in list together with an 'a' in the middle
+#! Note: if you want to modify each character in a string, better to make it into a list while modifying and then ''.join()
+#! Note: dont use too many functions for now, globals and locals fuck it yp
 
 import random
 
@@ -133,6 +135,7 @@ while True:
     if game_lost:
         print(f'The word was {word}')
     elif game_won:
+        print(f'The word was {word}')
         print(f'You got the word, well done')
     keep = get_keep()
     if keep != 'y':
