@@ -57,7 +57,9 @@ hangman_ascii = ['''
 def get_guess():
     while True:
         function_guess = input('Please input a letter to guess: ')
-        if len(function_guess) == 1 and function_guess.isalpha():
+        if function_guess in guessed:
+            print('Already guessed letter.')
+        elif len(function_guess) == 1 and function_guess.isalpha():
             function_guess = function_guess.lower()
             break
         else:
@@ -91,7 +93,13 @@ print('''
       ''')
 
 while True:
-    word_list = ['aardvark', 'beaver', 'cat']
+    word_list = ('ant baboon badger bat bear beaver camel cat clam cobra cougar '
+         'coyote crow deer dog donkey duck eagle ferret fox frog goat '
+         'goose hawk lion lizard llama mole monkey moose mouse mule newt '
+         'otter owl panda parrot pigeon python rabbit ram rat raven '
+         'rhino salmon seal shark sheep skunk sloth snake spider '
+         'stork swan tiger toad trout turkey turtle weasel whale wolf '
+         'wombat zebra ').split()
     lives = 6
     guessed = []
     game_won = False
@@ -111,8 +119,10 @@ while True:
             lives -= 1
             if lives == 0:
                 game_lost = True
+                print(hangman_ascii[6])
             print('Letter was not in word')
         else:
+            guessed.append(game_guess)
             for index in range(word_length):
                 if word[index] == game_guess:
                     display_list = list(display)
@@ -124,6 +134,6 @@ while True:
         print(f'The word was {word}')
     elif game_won:
         print(f'You got the word, well done')
-    keep = get_keep
+    keep = get_keep()
     if keep != 'y':
         break
