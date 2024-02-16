@@ -8,6 +8,7 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 def caesar(text, shift, task):
+    '''Uses the input of a text, shift amount and encode/decode task to encrypt or decrypt wanted messages'''
     product = ''
     shift = shift % 26
     if task == 'decode':
