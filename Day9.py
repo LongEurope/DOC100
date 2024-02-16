@@ -1,23 +1,27 @@
 #learning about dictionaries, nesting lists and dictionaries
 #Making a blind auction program
+#! Note: look at line 10, making multiple items for a dictionary can be vr useful
 #! Note: to clear console, import os, os.system('cls')
 
 import os
 
 #MAIN
-participants = []
+participants = {}
+winner = {'name': None, 'bid': 0}
 
-def find_highest_bid():
-    winning_bidder = {participants[0]}
-
-print('Welcome to blind bidder.')
-while True:
-    name = input('Please input your name here: ')
-    bid = int(input('Please input your bid: '))
-    participants.append({name: bid})
-    keep = input('Your information has been stored, are there any other participants? Input "y" to add more participants, input any other key to finish the auction.\n')
-    if keep != 'y':
-        break
-    os.system('cls')
 os.system('cls')
-find_highest_bid()
+print('Welcome to blind bidder')
+while True:
+    name = input('Input the name you wish to be attached for your bid: ')
+    bid = int(input('Input the amount of money you wish to bid: '))
+    participants[name] = bid
+    keep = input('Would you like to add another participant? Enter "y" to add, enter any other key to finish')
+    if keep != 'y':
+        os.system('cls')
+        break
+for person in participants:
+    if participants[person] > winner['bid']:
+        winner['name'] = person
+        winner['bid'] = participants[person]
+
+print(f'The winner of the auction is {winner["name"]} bidding at ${winner["bid"]}')
