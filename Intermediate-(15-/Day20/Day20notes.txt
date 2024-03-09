@@ -1,0 +1,10 @@
+Using OOP and turtle to make snake
+
+Day 1:
+- Creating a snake body (Three squares next to eachother)
+- Moving the snake (going forward, changing direction via keyboard)
+
+Day 2:
+- Creating food and detecting collision with food
+- Creating scoreboard
+- Detect collision with wall or self
