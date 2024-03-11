@@ -1,3 +1,5 @@
+#Can control the amount of cars via rolling a number between 1 and 6 and creating a car on 1
+
 from turtle import Turtle
 import time
 import random
