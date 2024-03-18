@@ -1,4 +1,5 @@
 #State quiz
+#Came back after day 26 with list comprehension to optimise
 import pandas as pd
 import turtle
 
@@ -30,12 +31,8 @@ while len(guessed_states) < 50:
     elif answer_state == 'Exit':
         break
 
-#Making a csv to learn
-states_to_learn = []
-
-for each_state in all_states:
-    if each_state not in guessed_states:
-        states_to_learn.append(each_state)
+#Making a csv to learn / used list comprehension to optimise
+states_to_learn = [state for state in all_states if state not in guessed_states]
 
 new_csv = {
     'States to learn': states_to_learn
